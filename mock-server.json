@@ -1,0 +1,63 @@
+{
+  "columns": [
+    {
+      "id": "col-1",
+      "columnTitle": "Today"
+    },
+    {
+      "id": "col-2",
+      "columnTitle": "No time limits"
+    },
+    {
+      "id": "9d92e5fb-1cf9-4e20-8896-e0c21cc9584d",
+      "columnTitle": "Test"
+    },
+    {
+      "id": "0986b6e4-14fe-42ea-b962-aac9ccb8f6e2",
+      "columnTitle": "Hi"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "1",
+      "columnId": "col-1",
+      "name": "First task",
+      "description": "do home work!!!!",
+      "status": "ready",
+      "priority": "low",
+      "endDate": ""
+    },
+    {
+      "id": "5530da78-33fa-4143-ace4-b1c7b584a5a2",
+      "name": "Second",
+      "description": "1111111111",
+      "status": "pending",
+      "priority": "low",
+      "columnId": "col-1"
+    },
+    {
+      "id": "3ac6d8a2-46b1-4d81-9a0f-303906766c26",
+      "name": "Learn C++",
+      "description": "1111111",
+      "status": "pending",
+      "priority": "low",
+      "columnId": "col-2"
+    },
+    {
+      "id": "2b5fa229-8497-4720-b271-346cf23f38bb",
+      "name": "Learn C",
+      "description": "1231312",
+      "status": "pending",
+      "priority": "high",
+      "columnId": "col-2"
+    },
+    {
+      "id": "779e07e2-ecc2-4265-ae9b-93bb781bbf70",
+      "name": "11111",
+      "description": "fdsfds",
+      "status": "pending",
+      "priority": "low",
+      "columnId": "9d92e5fb-1cf9-4e20-8896-e0c21cc9584d"
+    }
+  ]
+}

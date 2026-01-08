@@ -2,12 +2,16 @@
   * {
     box-sizing: border-box;
   }
+  * {
+    margin: 0;
+  }
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
+  height: 100%;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color:  #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,6 +19,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+  height: 100%;
+  color: black;
+}
+
+ #root {
+  display: flex;
+  height: 100%;
+  flex: 1;
+  flex-direction: column;
+}
 
 @media (prefers-color-scheme: light) {
   :root {
