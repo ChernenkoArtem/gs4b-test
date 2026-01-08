@@ -21,14 +21,14 @@ export default function KanbanBoard() {
   const { openModal, closeModal } = useModal();
 
   const getTasksList = useCallback(
-    (controller: AbortController) => {
+    (controller?: AbortController) => {
       startTransition(async () => {
         try {
           const result = await simulateApiRequest<Column[]>(
             'http://localhost:3000/columns?_embed=tasks',
             {
               method: 'GET',
-              signal: controller.signal,
+              signal: controller && controller.signal,
             },
           );
           startTransition(() => {
@@ -120,7 +120,7 @@ export default function KanbanBoard() {
             </li>
           ))}
           <li>
-            <AddNewColumn />
+            <AddNewColumn getList={getTasksList} />
           </li>
         </ol>
       )}

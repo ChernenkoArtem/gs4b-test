@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 
-export default function AddNewColumn() {
+export default function AddNewColumn({ getList }: { getList: () => void }) {
   const [isCreateMode, setCreateMode] = useState(false);
 
   const {
@@ -23,6 +23,7 @@ export default function AddNewColumn() {
 
   const onSubmit = async (data: { columnTitle: string }) => {
     await addNewColumn(data.columnTitle);
+    getList();
     setCreateMode(false);
   };
 

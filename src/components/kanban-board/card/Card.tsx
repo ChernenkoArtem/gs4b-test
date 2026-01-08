@@ -19,7 +19,7 @@ export default function Card({
   ...commonProps
 }: {
   task: Task;
-  getList: (controller: AbortController) => void;
+  getList: () => void;
   commonProps: HTMLProps<CardProps>;
 }) {
   const priorityColors: Record<string, { bg: string; text: string }> = {
@@ -33,7 +33,7 @@ export default function Card({
   ) => {
     event.stopPropagation();
     await deleteTask(task.id);
-    getList(new AbortController());
+    getList();
   };
 
   return (
@@ -48,6 +48,7 @@ export default function Card({
         '&:hover': { backgroundColor: '#f9fafb' },
         transition: 'background-color 0.2s ease',
         mb: 2,
+        minWidth: 180,
       }}
     >
       <CardContent sx={{ p: 1.5, '&:last-child': { pb: 1.5 } }}>
@@ -126,6 +127,14 @@ export default function Card({
               </Typography>
             </Stack>
           </Box>
+          <Stack direction="row" spacing={0.5} alignItems="center">
+            <span>🕒</span>
+            <Typography variant="caption" sx={{ color: '#5E6C84' }}>
+              {task?.endDate
+                ? new Date(task?.endDate).toLocaleDateString('en-US', {})
+                : 'No end date'}
+            </Typography>
+          </Stack>
         </Stack>
       </CardContent>
     </MuiCard>

@@ -28,5 +28,5 @@ export const priorityOptions = Object.values({ ...PRIORITY });
 export interface FilterState {
   status: SelectItem[];
   priority: SelectItem[];
-  endDate: Date | string | null;
+  sortOrder: SelectItem[];
 }

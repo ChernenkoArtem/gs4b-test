@@ -22,7 +22,7 @@ export default function FiltersProvider({
   const [filters, setFilters] = useState<FilterState>({
     status: statusOptions,
     priority: priorityOptions,
-    endDate: null,
+    sortOrder: [{ value: 'asc', label: 'ASC' }],
   });
 
   const setFilter = (key: keyof FilterState, value: SelectItem[]) => {
@@ -33,7 +33,7 @@ export default function FiltersProvider({
   };
 
   const resetFilters = () =>
-    setFilters({ status: [], priority: [], endDate: '' });
+    setFilters({ status: [], priority: [], sortOrder: [] });
 
   return (
     <>

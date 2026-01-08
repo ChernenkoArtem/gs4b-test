@@ -39,6 +39,20 @@ export default function Filters() {
           }}
         ></Select>
       </FormControl>
+      <FormControl css={{ minWidth: '20%' }}>
+        <Select
+          name="Sort"
+          selected={filterContext?.filters.sortOrder || []}
+          label="Sort by date end"
+          options={[
+            { value: 'dsc', label: 'DSC' },
+            { value: 'asc', label: 'ASC' },
+          ]}
+          onSelect={(items) => {
+            filterContext?.setFilter('sortOrder', items);
+          }}
+        ></Select>
+      </FormControl>
     </div>
   );
 }

@@ -9,34 +9,36 @@ export const filterColumns = (
   const selectedStatuses = new Set(filters.status.map((s) => s.value));
   const selectedPriorities = new Set(filters.priority.map((p) => p.value));
 
-  const filterDateTimestamp = filters.endDate
-    ? new Date(filters.endDate).getTime()
-    : null;
+  const currentSortOrder = filters.sortOrder[0].value as
+    | 'asc'
+    | 'desc'
+    | undefined;
 
-  return columns.map((column) => ({
-    ...column,
-    tasks: column.tasks.filter((task) => {
+  return columns.map((column) => {
+    const processedTasks = column.tasks.filter((task) => {
       if (selectedStatuses.size > 0 && !selectedStatuses.has(task.status)) {
         return false;
       }
 
-      if (
-        selectedPriorities.size > 0 &&
-        !selectedPriorities.has(task.priority)
-      ) {
-        return false;
-      }
+      return !(
+        selectedPriorities.size > 0 && !selectedPriorities.has(task.priority)
+      );
+    });
 
-      if (filterDateTimestamp && task.endDate) {
-        const taskTimestamp = new Date(task.endDate).getTime();
-        if (taskTimestamp > filterDateTimestamp) {
-          return false;
-        }
-      }
+    if (currentSortOrder) {
+      processedTasks.sort((a, b) => {
+        const dateA = a.endDate ? new Date(a.endDate).getTime() : Infinity;
+        const dateB = b.endDate ? new Date(b.endDate).getTime() : Infinity;
 
-      return true;
-    }),
-  }));
+        return currentSortOrder === 'asc' ? dateA - dateB : dateB - dateA;
+      });
+    }
+
+    return {
+      ...column,
+      tasks: processedTasks,
+    };
+  });
 };
 
 export const updateTask = async (taskId: string, updates: Partial<Task>) => {

@@ -10,7 +10,7 @@ export type SelectItem = {
 
 export type SelectProps = {
   name: string;
-  selected: SelectItem[];
+  selected: SelectItem[] | SelectItem;
   label: string;
   options: SelectItem[];
   hideSpinner?: boolean;
@@ -27,9 +27,11 @@ export default function Select({
   onSelect,
 }: SelectProps) {
   const labelId = useId();
-  const selectedValues = selected.map((item) => {
-    return item.value;
-  });
+  const selectedValues = Array.isArray(selected)
+    ? selected.map((item) => {
+        return item.value;
+      })
+    : selected.value;
 
   const handleChange = (event: SelectChangeEvent<typeof selectedValues>) => {
     let value = event.target.value;
@@ -43,6 +45,8 @@ export default function Select({
       });
       return option || { label: value, value };
     });
+
+    console.log('newSelected', newSelected);
     onSelect?.(newSelected);
   };
 

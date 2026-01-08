@@ -12,23 +12,17 @@ import {
 import Select from '../../select/Select.tsx';
 import { priorityOptions, statusOptions } from '../../../data/filters.ts';
 import type { Task } from '../../../data/task.interface.ts';
+import { DateTimePicker } from '@mui/x-date-pickers';
+import dayjs from 'dayjs';
 
 const taskSchema = z.object({
   name: z.string().min(3, 'Min 3 characters').max(50, 'Too long'),
   description: z.string().min(1, 'Description is required'),
   status: z.string().min(1, 'Status is required'),
   priority: z.string().min(1, 'Priority is required'),
-  // endDate: z.date().refine(
-  //   (val) => {
-  //     const selectedDate = new Date(val);
-  //     const today = new Date();
-  //     today.setHours(0, 0, 0, 0);
-  //     return selectedDate >= today;
-  //   },
-  //   {
-  //     message: 'Date cannot be in the past',
-  //   },
-  // ),
+  endDate: z.any().refine((date) => {
+    return dayjs(date).isAfter(dayjs().subtract(1, 'minute'));
+  }, 'Date must be in the future'),
 });
 
 type TaskFormData = z.infer<typeof taskSchema>;
@@ -54,7 +48,7 @@ export const TaskForm = ({
       description: initialData?.description || '',
       status: initialData?.status || 'pending',
       priority: initialData?.priority || 'low',
-      // endDate: initialData?.endDate || new Date(),
+      endDate: initialData?.endDate || new Date(),
     },
   });
 
@@ -128,6 +122,27 @@ export const TaskForm = ({
           />
           <FormHelperText>{errors.status?.message}</FormHelperText>
         </FormControl>
+        <Controller
+          name="endDate"
+          control={control}
+          render={({ field, fieldState }) => (
+            <DateTimePicker
+              label="End Date"
+              value={field.value ? dayjs(field.value) : null}
+              onChange={(newValue) => {
+                // Передаємо значення у форматі ISO рядка або об'єкта dayjs
+                field.onChange(newValue ? newValue.toISOString() : null);
+              }}
+              slotProps={{
+                textField: {
+                  fullWidth: true,
+                  error: !!fieldState.error,
+                  helperText: fieldState.error?.message,
+                },
+              }}
+            />
+          )}
+        />
       </Stack>
 
       <Stack direction="row" spacing={2} justifyContent="flex-end">
