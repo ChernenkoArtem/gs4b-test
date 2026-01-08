@@ -46,7 +46,6 @@ export default function Select({
       return option || { label: value, value };
     });
 
-    console.log('newSelected', newSelected);
     onSelect?.(newSelected);
   };
 

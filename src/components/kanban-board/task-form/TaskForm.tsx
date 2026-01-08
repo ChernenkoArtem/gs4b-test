@@ -33,7 +33,7 @@ export const TaskForm = ({
   onCancel,
 }: {
   initialData?: Task;
-  onSubmit: (data: Task, isValid: boolean) => Promise<void>;
+  onSubmit: (data: Partial<Task>) => Promise<void>;
   onCancel: () => void;
 }) => {
   const {
@@ -102,7 +102,6 @@ export const TaskForm = ({
           <FormHelperText>{errors.priority?.message}</FormHelperText>
         </FormControl>
 
-        {/* Status Select */}
         <FormControl fullWidth error={!!errors.status}>
           <Controller
             name="status"
@@ -130,7 +129,6 @@ export const TaskForm = ({
               label="End Date"
               value={field.value ? dayjs(field.value) : null}
               onChange={(newValue) => {
-                // Передаємо значення у форматі ISO рядка або об'єкта dayjs
                 field.onChange(newValue ? newValue.toISOString() : null);
               }}
               slotProps={{

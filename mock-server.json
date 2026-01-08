@@ -73,14 +73,15 @@
       "description": "fdhfghdf",
       "status": "completed",
       "priority": "high",
-      "columnId": "9d92e5fb-1cf9-4e20-8896-e0c21cc9584d"
+      "columnId": "9d92e5fb-1cf9-4e20-8896-e0c21cc9584d",
+      "endDate": "2026-01-08T22:14:44.088Z"
     },
     {
       "id": "db8a6773-f232-47a0-95cc-578d910f40f7",
       "name": "DAte test",
       "description": "21313",
       "status": "pending",
-      "priority": "low",
+      "priority": "high",
       "endDate": "2026-01-16T21:09:19.817Z",
       "columnId": "9d92e5fb-1cf9-4e20-8896-e0c21cc9584d"
     },

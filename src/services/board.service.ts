@@ -54,7 +54,7 @@ export const updateTask = async (taskId: string, updates: Partial<Task>) => {
   );
 };
 
-export const createTask = async (taskData: Task, columnId: string) => {
+export const createTask = async (taskData: Partial<Task>, columnId: string) => {
   return await simulateApiRequest(
     'http://localhost:3000/tasks',
     {
