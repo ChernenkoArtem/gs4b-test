@@ -2,9 +2,12 @@ export const simulateApiRequest = async <T>(
   endpoint: string,
   options?: RequestInit,
   errorMsg?: string,
+  isDelay: boolean = true,
 ): Promise<T> => {
-  const delay = Math.floor(Math.random() * (2000 - 200 + 1)) + 200;
-  await new Promise((resolve) => setTimeout(resolve, delay));
+  if (isDelay) {
+    const delay = Math.floor(Math.random() * (2000 - 200 + 1)) + 200;
+    await new Promise((resolve) => setTimeout(resolve, delay));
+  }
 
   try {
     const response = await fetch(endpoint, options);

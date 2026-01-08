@@ -47,7 +47,7 @@ export default function KanbanBoard() {
       initialData: task,
       onSubmit: async (data) => {
         try {
-          await updateTask(+task.id, data);
+          await updateTask(task.id, data);
           const controller = new AbortController();
           getTasksList(controller);
           closeModal();

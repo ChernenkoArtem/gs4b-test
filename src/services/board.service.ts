@@ -39,12 +39,17 @@ export const filterColumns = (
   }));
 };
 
-export const updateTask = async (taskId: number, updates: Partial<Task>) => {
-  return await simulateApiRequest(`http://localhost:3000/tasks/${taskId}`, {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(updates),
-  });
+export const updateTask = async (taskId: string, updates: Partial<Task>) => {
+  return await simulateApiRequest(
+    `http://localhost:3000/tasks/${taskId}`,
+    {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updates),
+    },
+    'Failed to update task with id',
+    false,
+  );
 };
 
 export const createTask = async (taskData: Task, columnId: string) => {
@@ -62,6 +67,7 @@ export const createTask = async (taskData: Task, columnId: string) => {
       }),
     },
     'Failed to create task',
+    false,
   );
 };
 
@@ -77,6 +83,7 @@ export const addNewColumn = async (title: string) => {
       }),
     },
     'Failed to create column',
+    false,
   );
 };
 
@@ -87,5 +94,6 @@ export const deleteTask = async (taskId: string | number) => {
       method: 'DELETE',
     },
     'Failed to delete task with id',
+    false,
   );
 };
